@@ -3,7 +3,7 @@ provider "azurerm"{
 }
 resource "azurerm_linux_virtual_machine" "example" {
   name = "${var.prefix}-vm"
-  resource_group_name = azurerm_resource_group.example.name
+  resource_group_name = "${var.resource}"
   location = var.location
 
 
