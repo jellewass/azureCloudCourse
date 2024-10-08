@@ -2,6 +2,7 @@
     "properties": {
         "mode": "All",
         "displayName": "Deny creation of resources that do not have tags",
+        "policyType": "Custom",
         "policyRule": {
             "if": {
                 "allof": [
