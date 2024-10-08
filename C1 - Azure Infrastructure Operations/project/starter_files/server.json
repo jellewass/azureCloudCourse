@@ -12,7 +12,7 @@
 		"os_type": "Linux",
 		"image_publisher": "Canonical",
 		"image_offer": "UbuntuServer",
-		"image_sku": "18.04-LTS",
+		"image_sku": "20.04-LTS",
 		"managed_image_resource_group_name": "Azuredevops",
 		"managed_image_name": "ubuntuImage",
 		"location": "East US"
