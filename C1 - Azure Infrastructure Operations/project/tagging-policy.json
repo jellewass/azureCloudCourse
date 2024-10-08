@@ -1,12 +1,18 @@
 {
-    "mode": "All",
-    "policyRule": {
-        "if": {
-            "field": "tags",
-            "exists": "false"
-        },
-        "then": {
-            "effect": "deny"
+    "properties": {
+        "mode": "All",
+        "displayName": "Deny creation of resources that do not have tags",
+        "policyRule": {
+            "if": {
+                "allof": [
+                {
+                "field": "tags",
+                "exists": "false"
+                }
+            ]}
+            "then": {
+                "effect": "deny"
+            }
         }
     },
     "parameters": {}
