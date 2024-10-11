@@ -29,6 +29,7 @@ resource "azurerm_network_interface" "example" {
 }
 
 resource "azurerm_linux_virtual_machine" "example" {
+  count = var.instance_count
   name = "var.prefix-vm"
   resource_group_name = "${var.resource_group}"
   admin_username = "adminuser"
