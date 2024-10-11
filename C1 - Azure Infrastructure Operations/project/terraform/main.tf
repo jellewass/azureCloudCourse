@@ -1,6 +1,6 @@
 provider "azurerm"{
   features {}
-subscription_id = "fe543d6c-d65a-4f94-99e0-886fb95f57dd"
+  subscription_id = "fe543d6c-d65a-4f94-99e0-886fb95f57dd"
 }
 
 resource "azurerm_virtual_network" "example" {
