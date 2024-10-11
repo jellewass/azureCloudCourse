@@ -41,14 +41,15 @@ resource "azurerm_linux_virtual_machine" "example" {
     storage_account_type = "Standard_LRS"
     caching = "ReadWrite"
   }
-}
 
-source_image_reference {
-  publisher = "Canonical"
-  offer = "UbuntuServer"
-  sku = "22.04-LTS"
-  version = "latest"
 
+  source_image_reference {
+    publisher = "Canonical"
+    offer = "UbuntuServer"
+    sku = "22.04-LTS"
+    version = "latest"
+  
+  }
 }
 
 
