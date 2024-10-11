@@ -12,10 +12,10 @@
 		"os_type": "Linux",
 		"image_publisher": "Canonical",
 		"image_offer": "UbuntuServer",
-		"image_sku": "20.04-LTS",
+		"image_sku": "22.04-LTS",
 		"managed_image_resource_group_name": "Azuredevops",
 		"managed_image_name": "ubuntuImage",
-		"location": "East US"
+		"location": "West Europe (Zone 1)"
 		"vm_size": "Standard_D2s_v3"
 	}],
 	"provisioners": [{
