@@ -53,7 +53,7 @@ Generate and save an execution plan
 `Plan: 1 to add, 0 to change, 0 to destroy.`
 Expect the output to contain something similar as above.
 
-#### 5. Destory Resources
+#### 5. Destroy Resources
 Then, when done, safely destroy everything with: 
 `terraform-destroy` 
 This will destory all your resources! 
