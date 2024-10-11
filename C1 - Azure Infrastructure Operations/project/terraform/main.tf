@@ -37,6 +37,9 @@ resource "azurerm_linux_virtual_machine" "example" {
   location = var.location
   size = "Standard_F2"
   disable_password_authentication = true
+  network_interface_ids = [
+    azurerm_network_interface.example.id,
+]
   source_image_reference {
     publisher = "Canonical"
     offer = "UbuntuServer"
