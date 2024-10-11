@@ -14,7 +14,7 @@
             "then": {
                 "effect": "deny"
             }
-        }
-    },
-    "parameters": {}
+        },
+        "parameters": {}
+    }
 }
