@@ -6,9 +6,9 @@ For this project, you will write a Packer template and a Terraform template to d
 ### Getting Started
 1. Clone this repository
 
-2. Create your infrastructure as code
+2. Customize `vars.tf` and `server.json` files
 
-3. Update this README to reflect how someone would use your code.
+3. Create Infrastructure as a Code
 
 ### Dependencies
 1. Create an [Azure Account](https://portal.azure.com) 
@@ -17,8 +17,44 @@ For this project, you will write a Packer template and a Terraform template to d
 4. Install [Terraform](https://www.terraform.io/downloads.html)
 
 ### Instructions
-Run `terraform plan -out <FILE>` to run the terraform files. Then, descriptions can be added to the necessary variables. Then, run `terraform apply` to apply our changes. 
+#### 1. Customize vars.tf and server.json file
+The `vars.tf` file is used to define variables that can be customized to suit your specific needs. 
+In Github, edit the file such that it is in accordance with your resources. 
+For example, change the `location` to be one that is closest to you: 
+`
+variable "location" {
+  description = "East US"
+  default = "East US"
+}`
 
-### Output
-`terraform show` will show the results and the expected output looks much the same as the main.tf file with filled in variables. Then, after doing this, `terraform-destroy` will destory all our resources. 
+In the `server.json` file, add the following based on your customized information:
+`"client_id": "{{env `ARM_CLIENT_ID`}}",
+ "client_secret": "{{env `ARM_CLIENT_SECRET`}}",
+ "subscription_id": "{{env `ARM_SUBSCRIPTION_ID`}}"`
+
+#### 2. Build the Server Image
+Use Packer to build the server image.
+`packer build server.json`
+** Expected Output **
+`Build 'amazon-ebs' finished.`
+Expect the output to contain something similar as above.
+
+#### 3. Initialize Terraform
+Initialize the Terraform working directory
+`terraform init`
+** Expected Output **
+`Terraform has been successfully initialized!`
+Expect the output to contain something similar as above.
+
+#### 4. Plan the Terraform Deployment
+Generate and save an execution plan
+`terraform plan -out solution.plan`
+** Expected Output **
+`Plan: 1 to add, 0 to change, 0 to destroy.`
+Expect the output to contain something similar as above.
+
+#### 5. Destory Resources
+Then, when done, safely destroy everything with: 
+`terraform-destroy` 
+This will destory all your resources! 
 
