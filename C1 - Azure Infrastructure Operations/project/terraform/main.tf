@@ -11,7 +11,7 @@ resource "azurerm_virtual_network" "example" {
   source_image_reference {
     publisher = "Canonical"
     offer = "UbuntuServer"
-    sku = "20.04-LTS"
+    sku = "22.04-LTS"
     version = "latest"
   }
 }
@@ -47,7 +47,7 @@ resource "azurerm_linux_virtual_machine" "example" {
 source_image_reference {
   publisher = "Canonical"
   offer = "UbuntuServer"
-  sku = "20.04-LTS"
+  sku = "22.04-LTS"
   version = "latest"
 
 }
