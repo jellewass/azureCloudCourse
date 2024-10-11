@@ -31,8 +31,9 @@ resource "azurerm_network_interface" "example" {
 resource "azurerm_linux_virtual_machine" "example" {
   name = "var.prefix-vm"
   resource_group_name = "${var.resource_group}"
-  network_interface_ids = ""
-  admin_username = ""
+  network_interface_ids = [
+   azure_rm_network_interface.example.id]
+  admin_username = "adminuser"
   location = var.location
   size = "Standard_F2"
   disable_password_authentication = true
