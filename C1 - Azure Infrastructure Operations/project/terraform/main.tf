@@ -32,24 +32,21 @@ resource "azurerm_linux_virtual_machine" "example" {
   name = "var.prefix-vm"
   resource_group_name = "${var.resource_group}"
   network_interface_ids = [
-   azure_rm_network_interface.example.id]
+  azure_rm_network_interface.example.id]
   admin_username = "adminuser"
   location = var.location
   size = "Standard_F2"
   disable_password_authentication = true
-  os_disk {
-    storage_account_type = "Standard_LRS"
-    caching = "ReadWrite"
-  }
-
-
   source_image_reference {
     publisher = "Canonical"
     offer = "UbuntuServer"
     sku = "22.04-LTS"
-    version = "latest"
-  
+    version = "latest" 
   }
+  os_disk {
+    storage_account_type = "Standard_LRS"
+    caching = "ReadWrite"
+  }  
 }
 
 
