@@ -7,13 +7,6 @@ resource "azurerm_virtual_network" "example" {
   resource_group_name = "${var.resource_group}"
   location = var.location
   address_space = ["10.0.0.0/16"]
-
-  source_image_reference {
-    publisher = "Canonical"
-    offer = "UbuntuServer"
-    sku = "22.04-LTS"
-    version = "latest"
-  }
 }
 
 resource "azurerm_subnet" "internal" {
@@ -38,11 +31,24 @@ resource "azurerm_network_interface" "example" {
 resource "azurerm_linux_virtual_machine" "example" {
   name = "var.prefix-vm"
   resource_group_name = "${var.resource_group}"
+  network_interface_ids = ""
+  admin_username = ""
   location = var.location
   size = "Standard_F2"
   disable_password_authentication = true
+  os_disk {
+    storage_account_type = "Standard_LRS"
+    caching = "ReadWrite"
+  }
+}
+
+source_image_reference {
+  publisher = "Canonical"
+  offer = "UbuntuServer"
+  sku = "22.04-LTS"
+  version = "latest"
 
 }
 
-  
+
 
