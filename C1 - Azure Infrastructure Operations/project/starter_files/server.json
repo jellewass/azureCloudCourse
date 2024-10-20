@@ -20,11 +20,27 @@
 	}],
 	"provisioners": [{
 		"inline": [
-			"echo 'Hello, World!' > index.html",
-			"nohup busybox httpd -f -p 80 &"
+ 			    "export TZ=Europe/Berlin",
+		            "ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone",
+		            "apt-get update",
+		            "apt-get install -y busybox supervisor",
+		            "mkdir -p /usr/www",
+		            "chown www-data:www-data /usr/www",
+		            "echo 'Hello, World!' > /usr/www/index.html",
+		            "echo '[supervisord]' > /etc/supervisor/supervisord.conf",
+		            "echo 'nodaemon=true' >> /etc/supervisor/supervisord.conf",
+		            "echo '[program:httpd]' >> /etc/supervisor/supervisord.conf",
+		            "echo 'command=/bin/busybox httpd -f -p 80 -h /usr/www' >> /etc/supervisor/supervisord.conf",
+		            "echo 'autostart=true' >> /etc/supervisor/supervisord.conf",
+		            "echo 'autorestart=true' >> /etc/supervisor/supervisord.conf"
 		],
 		"inline_shebang": "/bin/sh -x",
 		"type": "shell",
 		"execute_command": "chmod +x {{ .Path}}; {{ .Vars }} sudo -E sh '{{ .Path }}'"
-	}]
+	}],
+"post-processors": [{
+        "type": "docker-tag",
+        "repository": "turingtaco/provisioner-demo",
+        "tag": "latest"
+    }]
 }
