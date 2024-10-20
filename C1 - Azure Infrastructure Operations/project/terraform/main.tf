@@ -132,3 +132,79 @@ resource "azurerm_lb_rule" "example" {
   frontend_port                  = 80
   backend_port                   = 80
 }
+
+resource "azurerm_network_security_rule" "deny_inbound" {
+  name                        = "DenyInboundInternet"
+  priority                    = 4096
+  direction                   = "Inbound"
+  access                      = "Deny"
+  protocol                    = "*"
+  source_port_range           = "*"
+  destination_port_range      = "*"
+  source_address_prefix       = "Internet"
+  destination_address_prefix  = "*"
+  resource_group_name  = "${var.resource_group}"
+  network_security_group_name = azurerm_network_security_group.example.name
+  tags = {
+    Environment = var.environment
+    Project     = var.project_name
+  }
+}
+
+resource "azurerm_network_security_rule" "allow_vnet_inbound" {
+  name                        = "${var.prefix}-allow-vnet-inbound"
+  priority                    = 100
+  direction                   = "Inbound"
+  access                      = "Allow"
+  protocol                    = "*"
+  source_port_range           = "*"
+  destination_port_range      = "*"
+  source_address_prefix       = "VirtualNetwork"
+  destination_address_prefix  = "*"
+  resource_group_name  = "${var.resource_group}"
+  network_security_group_name = azurerm_network_security_group.example.name
+  tags = {
+    Environment = var.environment
+    Project     = var.project_name
+  }
+}
+
+resource "azurerm_network_security_rule" "allow_vnet_outbound" {
+  name                        = "${var.prefix}-allow-vnet-outbound"
+  priority                    = 100
+  direction                   = "Outbound"
+  access                      = "Allow"
+  protocol                    = "*"
+  source_port_range           = "*"
+  destination_port_range      = "*"
+  source_address_prefix       = "*"
+  destination_address_prefix  = "VirtualNetwork"
+  resource_group_name  = "${var.resource_group}"
+  network_security_group_name = azurerm_network_security_group.example.name
+  tags = {
+    Environment = var.environment
+    Project     = var.project_name
+  }
+}
+
+resource "azurerm_network_security_rule" "allow_http_loadbalancer" {
+  name                        = "${var.prefix}-allow_http_loadbalancer"
+  priority                    = 200
+  direction                   = "Inbound"
+  access                      = "Allow"
+  protocol                    = "Tcp"
+  source_port_range           = "*"
+  destination_port_range      = "80"
+  source_address_prefix       = "LoadBalancer"
+  destination_address_prefix  = "*"
+  network_security_group_name = azurerm_network_security_group.example.name
+  tags = {
+    Environment = var.environment
+    Project     = var.project_name
+  }
+}
+
+resource "azurerm_subnet_network_security_group_association" "example" {
+  subnet_id                 = azurerm_subnet.example.id
+  network_security_group_id = azurerm_network_security_group.example.id
+}
