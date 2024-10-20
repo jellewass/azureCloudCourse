@@ -28,3 +28,10 @@ variable "instance_count" {
     error_message = "The instance_count must be between 2 and 5."
   }
 }
+
+variable "environment" {
+  description = "The environment for the resources (e.g., dev, test, prod)"
+  type        = string
+  default     = "dev"  # You can set a default value or leave it out
+}
+
