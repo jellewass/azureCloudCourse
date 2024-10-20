@@ -3,6 +3,12 @@ variable "prefix" {
   default = "assignmentMachine"
 }
 
+variable "project_name" {
+  description = "The name of the project for tagging"
+  type        = string
+  default     = "MyVritualMachine"
+}
+
 variable "location" {
   description = "East US"
   default = "East US"
