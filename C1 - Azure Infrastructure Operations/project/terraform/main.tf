@@ -37,7 +37,7 @@ resource "azurerm_linux_virtual_machine" "example" {
   location            = var.location
   size                = "Standard_F2"
   tags = {
-    Project = "MyVirtualMachine"
+    Project = var.project_name
   }
   disable_password_authentication = true
   network_interface_ids = [
