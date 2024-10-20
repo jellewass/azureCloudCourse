@@ -132,9 +132,3 @@ resource "azurerm_lb_rule" "example" {
   frontend_port                  = 80
   backend_port                   = 80
 }
-
-
-
-
-
-
