@@ -36,6 +36,9 @@ resource "azurerm_linux_virtual_machine" "example" {
   admin_username      = "adminuser"
   location            = var.location
   size                = "Standard_F2"
+  tags = {
+    Project = "MyVirtualMachine"
+  }
   disable_password_authentication = true
   network_interface_ids = [
     azurerm_network_interface.example.id,
